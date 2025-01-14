@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:latest # 使用最新版本的 Node.js
+    container_name: node_app
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app # 挂载当前目录到容器内
+    ports:
+      - "3000:3000" # 将容器内的 3000 端口映射到宿主机的 3000 端口
+    environment:
+      - NODE_ENV=development
+    command: >
+      sh -c "
+      npm install &&
+      npm run dev
+      "

@@ -18,22 +18,6 @@
             </div>
           </div>
           <div class="content">
-            <div class="item" @click="_no">
-              <img
-                class="xcx"
-                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/pipieh7nupabozups/toutiao_web_pc/tt-icon.png"
-                alt=""
-              />
-              <span>今日头条</span>
-            </div>
-            <div class="item" @click="_no">
-              <img
-                class="xcx"
-                src="https://gd-hbimg.huaban.com/65130a3e6a139530bb03bd118e21a2603af7df4e1303b-OOzcBu_fw658webp"
-                alt=""
-              />
-              <span>西瓜视频</span>
-            </div>
           </div>
         </div>
 
@@ -59,40 +43,6 @@
           <div class="header">
             <div class="left">常用功能</div>
             <div class="right"></div>
-          </div>
-          <div class="content">
-            <div class="item" @click="_no">
-              <Icon icon="ion:wallet-outline" />
-              <span>我的钱包</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="mingcute:coupon-line" />
-              <span>券包</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="icon-park-outline:bytedance-applets" />
-              <span>小程序</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="solar:history-linear" />
-              <span>观看历史</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="fluent:content-settings-24-regular" />
-              <span>内容偏好</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="iconoir:cloud-download" />
-              <span>离线模式</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="ep:setting" />
-              <span>设置</span>
-            </div>
-            <div class="item" @click="_no">
-              <Icon icon="icon-park-outline:baggage-delay" />
-              <span>稍后再看</span>
-            </div>
           </div>
         </div>
       </SlideItem>
@@ -196,18 +146,6 @@
     </ConfirmDialog>
 
     <ShareToFriend v-model="state.shareToFriend" />
-
-    <BaseMask v-if="!isMobile" @click="isMobile = true" />
-    <div v-if="!isMobile" class="guide">
-      <Icon class="danger" icon="mynaui:danger-triangle" />
-      <Icon class="close" icon="simple-line-icons:close" @click="isMobile = true" />
-      <div class="txt">
-        <h2>切换至手机模式获取最佳体验</h2>
-        <h3>1. 按 F12 调出控制台</h3>
-        <h3>2. 按 Ctrl+Shift+M，或点击下面图标</h3>
-      </div>
-      <img src="@/assets/img/guide.png" alt="" />
-    </div>
   </div>
 </template>
 
@@ -243,7 +181,6 @@ import BaseMask from '@/components/BaseMask.vue'
 const nav = useNav()
 const baseStore = useBaseStore()
 const uploader = ref()
-const isMobile = ref(/Mobi|Android|iPhone/i.test(navigator.userAgent))
 
 const state = reactive({
   active: true,
@@ -508,5 +445,11 @@ function dislike() {
     display: block;
     width: 350rem;
   }
+}
+</style>
+
+<style scoped lang="less">
+.message.mb2r {
+  display: none;
 }
 </style>
