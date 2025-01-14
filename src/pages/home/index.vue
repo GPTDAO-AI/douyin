@@ -82,15 +82,6 @@
         />
       </SlideItem>
       <SlideItem>
-        <UserPanel
-          ref="uploader"
-          v-model:currentItem="state.currentItem"
-          :active="state.baseIndex === 2"
-          @toggleCanMove="(e) => (state.canMove = e)"
-          @back="state.baseIndex = 1"
-          @showFollowSetting="state.showFollowSetting = true"
-          @showFollowSetting2="state.showFollowSetting2 = true"
-        />
       </SlideItem>
     </SlideHorizontal>
 
