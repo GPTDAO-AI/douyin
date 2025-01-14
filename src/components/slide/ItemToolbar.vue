@@ -127,7 +127,7 @@ const vClick = useClick()
     <!--        :cover="item.music.cover"-->
     <!--        v-click="$router.push('/home/music')"-->
     <!--    /> -->
-    <!-- <BaseMusic /> -->
+    <BaseMusic />
   </div>
 </template>
 
