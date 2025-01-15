@@ -34,7 +34,7 @@
         <div :style="{ opacity: state.isMove ? 0 : 1 }" class="normal">
           <template v-if="!state.commentVisible">
             <ItemToolbar v-model:item="state.localItem" />
-            <ItemDesc v-model:item="state.localItem" />
+            <!-- <ItemDesc v-model:item="state.localItem" /> -->
           </template>
           <div v-if="isMy" class="comment-status">
             <div class="comment">

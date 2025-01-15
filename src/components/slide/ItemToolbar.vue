@@ -74,6 +74,7 @@ const vClick = useClick()
 
 <template>
   <div class="toolbar mb1r">
+    <!--
     <div class="avatar-ctn mb2r">
       <img
         class="avatar"
@@ -88,18 +89,22 @@ const vClick = useClick()
         </div>
       </transition>
     </div>
+    -->
     <div class="love mb2r" v-click="loved">
       <div>
         <img src="../../assets/img/icon/love.svg" class="love-image" v-if="!item.isLoved" />
         <img src="../../assets/img/icon/loved.svg" class="love-image" v-if="item.isLoved" />
       </div>
-      <span>{{ _formatNumber(item.statistics.digg_count) }}</span>
+      <!-- <span>{{ _formatNumber(item.statistics.digg_count) }}</span> -->
     </div>
+    <!--
     <div class="message mb2r" v-click="showComments">
       <Icon icon="mage:message-dots-round-fill" class="icon" style="color: white" />
       <span>{{ _formatNumber(item.statistics.comment_count) }}</span>
     </div>
+    -->
     <!--TODO     -->
+    <!--
     <div class="message mb2r" v-click="collected">
       <Icon
         v-if="item.isCollect"
@@ -110,9 +115,10 @@ const vClick = useClick()
       <Icon v-else icon="ic:round-star" class="icon" style="color: white" />
       <span>{{ _formatNumber(item.statistics.collect_count) }}</span>
     </div>
+    -->
     <div v-if="!props.isMy" class="share mb2r" v-click="() => bus.emit(EVENT_KEY.SHOW_SHARE)">
       <img src="../../assets/img/icon/share-white-full.png" alt="" class="share-image" />
-      <span>{{ _formatNumber(item.statistics.share_count) }}</span>
+      <!-- <span>{{ _formatNumber(item.statistics.share_count) }}</span> -->
     </div>
     <div v-else class="share mb2r" v-click="() => bus.emit(EVENT_KEY.SHOW_SHARE)">
       <img src="../../assets/img/icon/menu-white.png" alt="" class="share-image" />
