@@ -108,10 +108,21 @@ const userItem = {
   ]
 }
 
-let allRecommendVideos = posts6.map((v: any) => {
-  v.type = 'recommend-video'
-  return v
-}) 
+let allRecommendVideos = (() => {
+  const videos = posts6.map((v: any) => {
+    v.type = 'recommend-video'
+    v.author = userItem
+    return v
+  }).slice(0, 10)
+  
+  // If less than 10 items, duplicate existing ones until we have 10
+  while (videos.length < 10) {
+    const itemToDuplicate = videos[Math.floor(Math.random() * videos.length)]
+    videos.push({ ...itemToDuplicate }) // Create a shallow copy
+  }
+  
+  return videos.sort(() => Math.random() - 0.5)
+})()
 
 
 // console.log('allRecommendVideos', allRecommendVideos)
@@ -207,7 +218,6 @@ const t = [
 async function fetchData() {
   const baseStore = useBaseStore()
 
-  //fetch('https://ttapi.gptdao.ai/app/random').then((r) => {
   _fetch(`${BASE_URL}/data/videos.md`).then((r) => {
     r.json().then(async (v) => {
       console.log('v', v)
