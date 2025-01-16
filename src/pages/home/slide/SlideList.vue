@@ -22,6 +22,7 @@ import bus, { EVENT_KEY } from '@/utils/bus'
 import { useBaseStore } from '@/store/pinia'
 import { slideItemRender } from '@/utils'
 
+
 const props = defineProps({
   cbs: {
     type: Object,
@@ -87,6 +88,7 @@ async function getData(refresh = false) {
     start: refresh ? 0 : state.list.length,
     pageSize: state.pageSize
   })
+  console.log('getSlide4Data-', refresh, res, state.totalSize, state.list.length)
   // console.log('getSlide4Data-', refresh, res, state.totalSize, state.list.length)
   baseStore.loading = false
   if (res.success) {

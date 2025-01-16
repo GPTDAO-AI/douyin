@@ -361,9 +361,16 @@ function click({ uniqueId, index, type }) {
 }
 
 function play() {
-  state.status = SlideItemPlayStatus.Play
-  videoEl.volume = 1
-  videoEl.play()
+  let p = videoEl.play()
+  if (p !== undefined) {
+    p.then(() => {
+      state.status = SlideItemPlayStatus.Play
+      videoEl.volume = 1
+    }).catch((e) => {
+      pause()
+      console.log('play error', e)
+    })
+  }
 }
 
 function pause() {
