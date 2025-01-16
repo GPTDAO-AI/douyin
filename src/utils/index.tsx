@@ -375,6 +375,7 @@ export function _no() {
  * @privateF
  */
 export async function _fetch(url: string): Promise<{ json(): Promise<any> } | Response> {
+  console.log('url', url)
   if (IS_DEV || !IS_GITEE_PAGES) {
     url = url.replace('.md', '.json')
     return fetch(url)
