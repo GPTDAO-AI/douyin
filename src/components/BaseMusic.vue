@@ -13,7 +13,7 @@
     </div>
     <img
       class="music"
-      :src="item.music?.cover_thumb.url_list[0]"
+      src="@/assets/img/icon/music.jpg"
       :style="style"
     />
   </div>
