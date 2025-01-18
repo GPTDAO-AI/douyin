@@ -9,6 +9,15 @@
   <Call />
 </template>
 <script setup lang="ts">
+declare global {
+  interface Window {
+    isMoved: boolean
+    isMuted: boolean
+    showMutedNotice: boolean
+    _paq: any[]
+  }
+}
+
 /*
 * try {navigator.control.gesture(false);} catch (e) {} //UC浏览器关闭默认手势事件
 try {navigator.control.longpressMenu(false);} catch (e) {} //关闭长按弹出菜单
