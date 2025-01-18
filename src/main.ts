@@ -8,6 +8,7 @@ import VueLazyload from '@jambonn/vue-lazyload'
 import { createPinia } from 'pinia'
 import { useClick } from '@/utils/hooks/useClick'
 import bus, { EVENT_KEY } from '@/utils/bus'
+import VueMatomo from 'vue-matomo'
 
 window.isMoved = false
 window.isMuted = true
@@ -37,6 +38,14 @@ HTMLElement.prototype.addEventListener = new Proxy(HTMLElement.prototype.addEven
 const vClick = useClick()
 const pinia = createPinia()
 const app = createApp(App)
+
+// Add Matomo configuration
+app.use(VueMatomo, {
+  host: 'https://dev3gptdaoai.matomo.cloud/',
+  siteId: 1,
+  router: router // This enables automatic tracking of page views
+})
+
 app.mixin(mixin)
 const loadImage = new URL('./assets/img/icon/img-loading.png', import.meta.url).href
 app.use(VueLazyload, {
