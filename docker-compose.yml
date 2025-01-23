@@ -16,3 +16,14 @@ services:
       npm install &&
       npm run dev
       "
+
+  refresher:
+    build:
+      context: .
+      dockerfile: Dockerfile-py
+      target: runtime
+    volumes:
+      - ./src:/app/src
+    image: douyin-refresher:1.0
+    container_name: douyin-refresher
+    restart: unless-stopped
