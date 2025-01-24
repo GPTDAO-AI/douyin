@@ -4,6 +4,7 @@ FROM python:3.12.1 AS builder
 WORKDIR /code
 ADD . /code
 RUN pip install httpx
+RUN pip install schedule
 RUN pip install pyinstaller
 RUN pyinstaller -F ./refresh.py
 
