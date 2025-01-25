@@ -24,6 +24,12 @@ import { slideItemRender } from '@/utils'
 
 
 const props = defineProps({
+  uid: {
+    type: String,
+    default() {
+      return ''
+    }
+  },
   cbs: {
     type: Object,
     default() {
@@ -74,7 +80,6 @@ const state = reactive({
 })
 
 function loadMore() {
-  console.log('load')
   if (!baseStore.loading) {
     getData()
   }
@@ -88,8 +93,6 @@ async function getData(refresh = false) {
     start: refresh ? 0 : state.list.length,
     pageSize: state.pageSize
   })
-  console.log('getSlide4Data-', refresh, res, state.totalSize, state.list.length)
-  // console.log('getSlide4Data-', refresh, res, state.totalSize, state.list.length)
   baseStore.loading = false
   if (res.success) {
     state.totalSize = res.data.total
@@ -99,16 +102,6 @@ async function getData(refresh = false) {
     state.list = state.list.concat(res.data.list)
   }
 }
-
-// function dislike() {
-//   listRef.value.dislike(state.list[1])
-//   state.list[state.index] = state.list[1]
-//   _notice('操作成功，将减少此类视频的推荐')
-// }
-
-// function end() {
-//   // _notice('暂时没有更多了')
-// }
 
 function click(uniqueId) {
   if (!props.active) return

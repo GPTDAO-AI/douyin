@@ -59,7 +59,7 @@ app.mount('#app')
 app.directive('click', vClick)
 
 //放到最后才可以使用pinia
-startMock()
+// startMock()
 setTimeout(() => {
   bus.emit(EVENT_KEY.HIDE_MUTED_NOTICE)
   window.showMutedNotice = false

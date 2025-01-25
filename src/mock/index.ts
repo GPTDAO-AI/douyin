@@ -489,6 +489,7 @@ export async function startMock() {
         w.author = userItem
         return w
       })
+      console.log('allRecommendVideos', allRecommendVideos)
     })
   })
 

@@ -239,7 +239,7 @@ function insertContent() {
     })
   }
   state.wrapper.childrenLength = slideListEl.value.children.length
-  // console.log('list[state.localIndex]',list[state.localIndex])
+  // console.log('list[state.localIndex]', props.list[state.localIndex])
   bus.emit(EVENT_KEY.CURRENT_ITEM, props.list[state.localIndex])
 }
 
@@ -258,10 +258,12 @@ defineExpose({ dislike })
  * @param index
  * @param play
  */
-function getInsEl(item, index, play = false) {
+function getInsEl(item, index, play = true) {
   // console.log('index', cloneDeep(item), index, play)
   let slideVNode = props.render(item, index, play, props.uniqueId)
   const parent = document.createElement('div')
+
+
   //TODO 打包到线上时用这个，这个在开发时任何修改都会刷新页面
   if (import.meta.env.PROD) {
     parent.classList.add('slide-item')
@@ -312,6 +314,7 @@ function touchEnd(e) {
       if (isNext) {
         //删除最前面的 `dom` ，然后在最后面添加一个 `dom`
         if (state.localIndex > props.list.length - props.virtualTotal && state.localIndex > half) {
+          console.log('emit-loadMore')
           emit('loadMore')
         }
 

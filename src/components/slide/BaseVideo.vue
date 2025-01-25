@@ -3,6 +3,7 @@
     <Loading v-if="state.loading" style="position: absolute" />
     <!--    <video :src="item.video + '?v=123'"-->
     <video
+      :src="item.video.play_addr.url_list[0]"
       :poster="poster"
       ref="videoEl"
       :muted="state.isMuted"
@@ -16,12 +17,6 @@
       :fullscreen="false"
       :autoplay="isPlay"
     >
-      <source
-        v-for="(urlItem, index) in item.video.play_addr.url_list"
-        :key="index"
-        :src="urlItem"
-        type="video/mp4"
-      />
       <p>您的浏览器不支持 video 标签。</p>
     </video>
     <Icon icon="fluent:play-28-filled" class="pause-icon" v-if="!isPlaying" />
@@ -34,7 +29,7 @@
         <div :style="{ opacity: state.isMove ? 0 : 1 }" class="normal">
           <template v-if="!state.commentVisible">
             <ItemToolbar v-model:item="state.localItem" />
-            <!-- <ItemDesc v-model:item="state.localItem" /> -->
+            <ItemDesc v-model:item="state.localItem" />
           </template>
           <div v-if="isMy" class="comment-status">
             <div class="comment">
@@ -174,7 +169,7 @@ let state = reactive({
   commentVisible: false
 })
 const poster = $computed(() => {
-  return _checkImgUrl(props.item.video.poster ?? props.item.video.cover.url_list[0])
+  return _checkImgUrl(props.item.video.poster ?? props.item.video.cover)
 })
 const durationStyle = $computed(() => {
   return { width: state.playX + 'px' }
@@ -301,7 +296,7 @@ function onDialogMove({ tag, e }) {
 
 function onDialogEnd({ tag, isClose }) {
   if (state.commentVisible && tag === 'comment') {
-    console.log('isClose', isClose)
+    // console.log('isClose', isClose)
     _css(videoEl, 'transition-duration', `300ms`)
     if (isClose) {
       state.commentVisible = false
@@ -361,16 +356,9 @@ function click({ uniqueId, index, type }) {
 }
 
 function play() {
-  let p = videoEl.play()
-  if (p !== undefined) {
-    p.then(() => {
-      state.status = SlideItemPlayStatus.Play
-      videoEl.volume = 1
-    }).catch((e) => {
-      pause()
-      console.log('play error', e)
-    })
-  }
+  state.status = SlideItemPlayStatus.Play
+  videoEl.volume = 1
+  videoEl.play()
 }
 
 function pause() {

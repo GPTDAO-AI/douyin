@@ -3,7 +3,8 @@ import config from '@/config'
 import { _notice } from './index'
 
 export const axiosInstance = axios.create({
-  baseURL: config.baseUrl,
+  baseURL: 'https://ttapi.gptdao.ai',
+  // baseURL: config.baseUrl,
   timeout: 60000
 })
 
@@ -40,7 +41,7 @@ axiosInstance.interceptors.response.use(
       return { success: true, code: 200, data }
     } else {
       if (data.data === undefined || data.data === null) {
-        data.data = { ...data }
+        data.data = data
       }
       let resCode = data.code
       if (resCode) {
@@ -68,8 +69,8 @@ axiosInstance.interceptors.response.use(
   },
   (error: AxiosError) => {
     console.log('error', error)
-    // console.log(error.response)
-    // console.log(error.response.status)
+    console.log(error.response)
+    console.log(error.response.status)
     if (error.response === undefined) {
       _notice('服务器响应超时')
       return { success: false, code: 500, msg: '服务器响应超时', data: [] }
@@ -96,7 +97,7 @@ axiosInstance.interceptors.response.use(
       } else {
         const resCode = data.code
         if (data.data === undefined || data.data === null) {
-          data.data = { ...data }
+          data.data = data
         }
         if (resCode && typeof resCode == 'number' && resCode !== 200) {
           _notice('请求失败，请稍后重试！')
@@ -119,6 +120,7 @@ export async function request<T = any>(config: AxiosRequestConfig): Promise<ApiR
   /*
    *  then和catch里面返回的数据必须加as const，否则调用方无法推断出类型
    * */
+  console.log('request', config)
   return axiosInstance
     .request<T>(config)
     .then(({ data }) => {

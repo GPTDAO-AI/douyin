@@ -98,8 +98,28 @@ export function historyVideo(params?: any, data?: any) {
   return request({ url: '/video/history', method: 'get', params, data })
 }
 
-export function recommendedVideo(params?: any, data?: any) {
-  return request({ url: '/video/recommended', method: 'get', params, data })
+export async function recommendedVideo(params?: any, data?: any) {
+  // console.log('recommendedVideo', params, data)
+  // return request({ url: '/app/random', method: 'get', params, data })
+
+  return new Promise((resolve, reject) => {
+    try {
+      const res = fetch('https://ttapi.gptdao.ai/app/random').then((res) => res.json())
+      res.then(data => {
+        console.log('recommendedVideo', data)
+        const result = {
+          list: data,
+          total: 100000000
+        }
+        resolve({
+          success: true,
+          data: result
+        })
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
 }
 
 export function recommendedLongVideo(params?: any, data?: any) {

@@ -9,11 +9,19 @@ export function userVideoList(params?: any, data?: any) {
 }
 
 export function panel(params?: any, data?: any) {
-  return request({ url: '/user/panel', method: 'get', params, data })
+  // return a promise that is empty
+  return new Promise((resolve) => {
+    resolve({})
+  })
+  // return request({ url: '/user/panel', method: 'get', params, data })
 }
 
 export function friends(params?: any, data?: any) {
-  return request({ url: '/user/friends', method: 'get', params, data })
+  // return a promise that is empty
+  return new Promise((resolve) => {
+    resolve({})
+  })
+  // return request({ url: '/user/friends', method: 'get', params, data })
 }
 
 export function userCollect(params?: any, data?: any) {

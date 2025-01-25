@@ -38,10 +38,10 @@ function loved() {
   }, 100)
   if (!props.item.isLoved) {
     // eslint-disable-next-line vue/no-mutating-props
-    props.item.statistics.digg_count++
+    // props.item.statistics.digg_count++
   } else {
     // eslint-disable-next-line vue/no-mutating-props
-    props.item.statistics.digg_count--
+    // props.item.statistics.digg_count--
   }
 }
 
