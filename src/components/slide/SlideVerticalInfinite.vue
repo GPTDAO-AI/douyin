@@ -14,6 +14,7 @@ import bus, { EVENT_KEY } from '../../utils/bus'
 import Loading from '@/components/Loading.vue'
 import { useBaseStore } from '@/store/pinia'
 import { _css } from '@/utils/dom'
+import PopupDialog from '@/components/PopupDialog.vue'
 
 const props = defineProps({
   index: {
@@ -74,6 +75,12 @@ const state = reactive({
   wrapper: { width: 0, height: 0, childrenLength: 0 }
 })
 const baseStore = useBaseStore()
+
+const showPopup = ref(false)
+
+const handlePopupClose = () => {
+  showPopup.value = false
+}
 
 watch(
   () => props.list,
@@ -318,6 +325,12 @@ function touchEnd(e) {
           emit('loadMore')
         }
 
+        console.log('state.localIndex', state.localIndex)
+        
+        if (state.localIndex === 4) {
+          showPopup.value = true
+        }
+
         // console.log('props.list.length', props.list.length, state.localIndex)
         if (state.localIndex > half && state.localIndex < props.list.length - half) {
           let addItemIndex = state.localIndex + half
@@ -383,5 +396,9 @@ function canNext(state, isNext: boolean) {
     >
       <slot></slot>
     </div>
+    <PopupDialog 
+      :visible="showPopup"
+      @close="handlePopupClose"
+    />
   </div>
 </template>
